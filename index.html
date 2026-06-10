@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>swear.jank</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f0f0f;
+      color: #eaeaea;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #1a1a1a;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #333;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: #181818;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 10px;
+      border: 1px solid #2a2a2a;
+    }
+
+    h2 {
+      color: #9ad1ff;
+    }
+
+    code {
+      background: #000;
+      padding: 10px;
+      display: block;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    button {
+      background: #3a82ff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #2f6fe0;
+    }
+
+    ul {
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>swear.jank</h1>
+  <p>discord swear counter + automation script</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>what is this</h2>
+    <p>
+      swear.jank is a simple automation idea that tracks how many times bad words are used in discord and optionally reacts to them.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>features</h2>
+    <ul>
+      <li>tracks swear usage in chat logs</li>
+      <li>auto increments counter</li>
+      <li>faster than manual counting</li>
+      <li>hotkey control (start/stop)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>stats concept</h2>
+    <ul>
+      <li>~+1k swears/second (theoretical)</li>
+      <li>~86M swears/day</li>
+      <li>~31B swears/year</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>how to set it up</h2>
+    <ol>
+      <li>download AutoHotkey v2 from official site</li>
+      <li>create a file named <b>swear.jank</b></li>
+      <li>paste the script below</li>
+      <li>save it (Ctrl + S)</li>
+      <li>run it with AutoHotkey</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>script (placeholder)</h2>
+    <code>
+; swear.jank script placeholder<br/>
+; press F2 to start<br/>
+; press F8 to stop<br/><br/>
+
+F2::<br/>
+Loop<br/>
+{<br/>
+&nbsp;&nbsp;Send, test<br/>
+&nbsp;&nbsp;Sleep, 100<br/>
+}<br/><br/>
+
+F8::ExitApp
+    </code>
+
+    <button onclick="copyScript()">copy script</button>
+  </div>
+
+  <div class="card">
+    <h2>download</h2>
+    <p>no real installer yet. this is just a concept page.</p>
+    <button onclick="alert('nothing to download yet :)')">download</button>
+  </div>
+
+</div>
+
+<footer>
+  swear.jank concept page
+</footer>
+
+<script>
+function copyScript() {
+  const text = `; swear.jank script placeholder
+F2::
+Loop
+{
+  Send, test
+  Sleep, 100
+}
+
+F8::ExitApp`;
+
+  navigator.clipboard.writeText(text);
+  alert("copied to clipboard");
+}
+</script>
+
+</body>
+</html>
