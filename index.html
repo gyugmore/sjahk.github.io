@@ -1,176 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>swear.jank</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0f0f0f;
-      color: #eaeaea;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    header {
-      background: #1a1a1a;
-      padding: 20px;
-      text-align: center;
-      border-bottom: 2px solid #333;
-    }
+<title>swear.ahk</title>
 
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
+<style>
 
-    .card {
-      background: #181818;
-      padding: 15px;
-      margin: 15px 0;
-      border-radius: 10px;
-      border: 1px solid #2a2a2a;
-    }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    text-transform: lowercase;
+}
 
-    h2 {
-      color: #9ad1ff;
-    }
+body{
+    font-family:"Space Grotesk",sans-serif;
+    background:white;
+    color:black;
+    overflow-x:hidden;
+}
 
-    code {
-      background: #000;
-      padding: 10px;
-      display: block;
-      border-radius: 8px;
-      overflow-x: auto;
-    }
+.checker{
+    position:fixed;
+    inset:0;
+    z-index:-2;
 
-    button {
-      background: #3a82ff;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
+    background:
+        repeating-conic-gradient(
+            #000 0% 25%,
+            #fff 25% 50%
+        );
 
-    button:hover {
-      background: #2f6fe0;
-    }
+    background-size:120px 120px;
+}
 
-    ul {
-      line-height: 1.6;
-    }
+.fade{
+    position:fixed;
+    inset:0;
+    z-index:-1;
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 12px;
-      color: #777;
-    }
-  </style>
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,255,255,0) 0%,
+            rgba(255,255,255,.75) 40%,
+            rgba(255,255,255,.98) 75%
+        );
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:4rem;
+}
+
+.container{
+    max-width:1200px;
+    width:100%;
+}
+
+.title{
+    font-size:clamp(6rem,16vw,14rem);
+    line-height:.85;
+    letter-spacing:-.08em;
+    font-weight:700;
+}
+
+.title span{
+    display:block;
+    margin-left:2rem;
+}
+
+.subtitle{
+    margin-top:2rem;
+    font-size:1.4rem;
+    color:#444;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:1rem;
+    margin-top:3rem;
+}
+
+.stat{
+    background:white;
+    border:2px solid black;
+    border-radius:24px;
+    padding:1.5rem;
+}
+
+.stat-number{
+    font-size:2rem;
+    font-weight:700;
+}
+
+.stat-label{
+    color:#666;
+}
+
+.download{
+    display:inline-block;
+    margin-top:2rem;
+    text-decoration:none;
+    color:white;
+    background:black;
+    padding:1rem 2rem;
+    border-radius:999px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.download:hover{
+    transform:translateY(-2px);
+}
+
+.section{
+    max-width:1100px;
+    margin:auto;
+    padding:8rem 2rem;
+}
+
+.section h2{
+    font-size:clamp(3rem,8vw,6rem);
+    line-height:.9;
+    margin-bottom:2rem;
+    letter-spacing:-.05em;
+}
+
+.card{
+    background:white;
+    border:2px solid black;
+    border-radius:24px;
+    padding:2rem;
+    margin-bottom:1rem;
+}
+
+.step{
+    background:white;
+    border:2px solid black;
+    border-radius:20px;
+    padding:1.5rem;
+    margin-bottom:1rem;
+}
+
+.step-number{
+    font-size:2rem;
+    font-weight:700;
+    margin-bottom:.5rem;
+}
+
+.footer{
+    text-align:center;
+    padding:4rem;
+    color:#666;
+}
+
+</style>
 </head>
 <body>
 
-<header>
-  <h1>swear.jank</h1>
-  <p>discord swear counter + automation script</p>
-</header>
+<div class="checker"></div>
+<div class="fade"></div>
+
+<section class="hero">
 
 <div class="container">
 
-  <div class="card">
-    <h2>what is this</h2>
-    <p>
-      swear.jank is a simple automation idea that tracks how many times bad words are used in discord and optionally reacts to them.
-    </p>
-  </div>
+<h1 class="title">
+SWEAR.
+<span>AHK</span>
+</h1>
 
-  <div class="card">
-    <h2>features</h2>
-    <ul>
-      <li>tracks swear usage in chat logs</li>
-      <li>auto increments counter</li>
-      <li>faster than manual counting</li>
-      <li>hotkey control (start/stop)</li>
-    </ul>
-  </div>
+<p class="subtitle">
+farm swears • best swear jar script!!
+</p>
 
-  <div class="card">
-    <h2>stats concept</h2>
-    <ul>
-      <li>~+1k swears/second (theoretical)</li>
-      <li>~86M swears/day</li>
-      <li>~31B swears/year</li>
-    </ul>
-  </div>
+<a href="#" class="download">
+download swear.ahk
+</a>
 
-  <div class="card">
-    <h2>how to set it up</h2>
-    <ol>
-      <li>download AutoHotkey v2 from official site</li>
-      <li>create a file named <b>swear.jank</b></li>
-      <li>paste the script below</li>
-      <li>save it (Ctrl + S)</li>
-      <li>run it with AutoHotkey</li>
-    </ol>
-  </div>
+<div class="stats">
 
-  <div class="card">
-    <h2>script (placeholder)</h2>
-    <code>
-; swear.jank script placeholder<br/>
-; press F2 to start<br/>
-; press F8 to stop<br/><br/>
+<div class="stat">
+<div class="stat-number">✓</div>
+<div class="stat-label">no spam popups</div>
+</div>
 
-F2::<br/>
-Loop<br/>
-{<br/>
-&nbsp;&nbsp;Send, test<br/>
-&nbsp;&nbsp;Sleep, 100<br/>
-}<br/><br/>
+<div class="stat">
+<div class="stat-number">1K+</div>
+<div class="stat-label">swears / second</div>
+</div>
 
-F8::ExitApp
-    </code>
+<div class="stat">
+<div class="stat-number">86M+</div>
+<div class="stat-label">swears / day</div>
+</div>
 
-    <button onclick="copyScript()">copy script</button>
-  </div>
-
-  <div class="card">
-    <h2>download</h2>
-    <p>no real installer yet. this is just a concept page.</p>
-    <button onclick="alert('nothing to download yet :)')">download</button>
-  </div>
+<div class="stat">
+<div class="stat-number">31B+</div>
+<div class="stat-label">swears / year</div>
+</div>
 
 </div>
 
-<footer>
-  swear.jank concept page
-</footer>
+</div>
 
-<script>
-function copyScript() {
-  const text = `; swear.jank script placeholder
-F2::
-Loop
-{
-  Send, test
-  Sleep, 100
-}
+</section>
 
-F8::ExitApp`;
+<section class="section">
 
-  navigator.clipboard.writeText(text);
-  alert("copied to clipboard");
-}
-</script>
+<h2>WHAT IS<br>SWEAR JAR?</h2>
+
+<div class="card">
+discord bot that counts how many times you used bad words, curse words, swear words, dirty words, whatever.
+<br><br>
+our tool makes grinding for swears easier and automated.
+<br><br>
+you gotta have your discord client open while farming tho.
+</div>
+
+</section>
+
+<section class="section">
+
+<h2>HOW TO<br>GET IT</h2>
+
+<div class="step">
+<div class="step-number">01</div>
+download autohotkey v2 from the official website.
+</div>
+
+<div class="step">
+<div class="step-number">02</div>
+open the app you downloaded.
+</div>
+
+<div class="step">
+<div class="step-number">03</div>
+create a file called <b>swear.ahk</b> and edit it in notepad.
+</div>
+
+<div class="step">
+<div class="step-number">04</div>
+paste the script and save (ctrl+s).
+</div>
+
+<div class="step">
+<div class="step-number">05</div>
+open with → autohotkey / autohotkey dash.
+</div>
+
+<div class="step">
+<div class="step-number">06</div>
+add swear jar to your server or join the spam server.
+</div>
+
+<div class="step">
+<div class="step-number">07</div>
+copy the swear text.
+</div>
+
+<div class="step">
+<div class="step-number">08</div>
+press F2 to start.
+</div>
+
+<div class="step">
+<div class="step-number">09</div>
+press F2 or F8 to stop.
+</div>
+
+</section>
+
+<div class="footer">
+swear.ahk © 2026
+</div>
 
 </body>
 </html>
