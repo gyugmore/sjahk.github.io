@@ -153,6 +153,24 @@ body{
     margin-bottom:1rem;
 }
 
+/* Specific styles for the clickable copy button */
+.step-copy {
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.1s, transform 0.1s;
+}
+
+.step-copy:hover {
+    background-color: #fcfcfc;
+    border-color: #000;
+    box-shadow: 0 4px 0px rgba(0,0,0,0.1);
+}
+
+.step-copy:active {
+    transform: scale(0.99);
+    box-shadow: none;
+}
+
 .step-number{
     font-size:2rem;
     font-weight:700;
@@ -250,9 +268,10 @@ open the app you downloaded.
 create a file called <b>swear.ahk</b> and edit it in notepad.
 </div>
 
-<div class="step">
+<!-- Updated Step 04 into a Click-to-Copy Button -->
+<div class="step step-copy" onclick="copyScriptText()" title="click to copy text">
 <div class="step-number">04</div>
-paste the script and save (ctrl+s).
+<span id="scriptText">paste the script and save (ctrl+s).</span>
 </div>
 
 <div class="step">
@@ -285,6 +304,26 @@ press F2 or F8 to stop.
 <div class="footer">
 swear.ahk © 2026
 </div>
+
+<!-- Copy function with visual inline feedback -->
+<script>
+function copyScriptText() {
+    const textElement = document.getElementById("scriptText");
+    const originalText = textElement.innerHTML;
+    const textToCopy = textElement.innerText;
+
+    navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+            textElement.innerText = "copied!";
+            setTimeout(() => {
+                textElement.innerHTML = originalText;
+            }, 1000);
+        })
+        .catch(err => {
+            console.error("failed to copy text: ", err);
+        });
+}
+</script>
 
 </body>
 </html>
